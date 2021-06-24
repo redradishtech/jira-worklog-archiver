@@ -110,7 +110,7 @@ Specifically:
   at com.pagerduty.jira.listeners.IssueListener.createNewIncidentIfNeeded(IssueListener.java:106)
   at com.pagerduty.jira.listeners.IssueListener.onIssueEvent(IssueListener.`java:88)
   ```
-  This needless ``reIndex()`` puts the slow index on the critical path for most operations. I am waiting for a response to my ticket, and will update this README when I do.
+  This needless ``reIndex()`` puts the slow index on the critical path for most operations. PagerDuty support say an internal issue has been raised to look at this. I will update this README if I hear back further. You can check if your PagerDuty listener reindexes by running ``javap -c -p -cp /var/atlassian/application-data/jira/plugins/installed-plugins/*jira-server-plugin.jar com.pagerduty.jira.listeners.IssueListener | grep reIndex``
 
 
 ## Indexing statistics
