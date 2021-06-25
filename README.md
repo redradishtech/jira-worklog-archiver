@@ -110,7 +110,10 @@ Specifically:
   at com.pagerduty.jira.listeners.IssueListener.createNewIncidentIfNeeded(IssueListener.java:106)
   at com.pagerduty.jira.listeners.IssueListener.onIssueEvent(IssueListener.`java:88)
   ```
-  This needless ``reIndex()`` puts the slow index on the critical path for most operations. PagerDuty support say an internal issue has been raised to look at this. I will update this README if I hear back further. You can check if your PagerDuty listener reindexes by running ``javap -c -p -cp /var/atlassian/application-data/jira/plugins/installed-plugins/*jira-server-plugin.jar com.pagerduty.jira.listeners.IssueListener | grep reIndex``
+  This needless ``reIndex()`` puts the slow index on the critical path for most operations. PagerDuty support say an internal issue has been raised to look at this. I will update this README if I hear back further.
+  
+You can check if your PagerDuty listener reindexes by running ``javap -c -p -cp /var/atlassian/application-data/jira/plugins/installed-plugins/*jira-server-plugin.jar com.pagerduty.jira.listeners.IssueListener | grep reIndex``. A better solution, if you're running Jira 8.17.1 or above, is to edit ``atlassian-jira/WEB-INF/classes/log4j.properties and increase ``DefaultIndexManager``s log level from DEBUG to TRACE, making use of new logging in Jira to see what is calling reindex: 
+![reindex code](docs/reIndexCode.png)
 
 
 ## Indexing statistics
